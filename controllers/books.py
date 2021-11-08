@@ -36,10 +36,10 @@ class Index(Resource):
 
 
 @books.route('/<int:id>')
-@books.param('id', 'User identifier')
-@books.response(404, 'User not found')
+@books.param('id', 'Book identifier')
+@books.response(404, 'Book not found')
 class Id(Resource):
-    @books.doc('show_user')
+    @books.doc('show_book')
     @books.marshal_with(BookModel)
     def get(self, id):
         response = Books.query.filter_by(id=id).first()
@@ -48,7 +48,7 @@ class Id(Resource):
         return book
 
 
-    @books.doc('update_user')
+    @books.doc('update_book')
     @books.marshal_with(BookModel)
     def put(self, id):
         req = request.get_json()
@@ -65,7 +65,7 @@ class Id(Resource):
         return book
 
 
-    @books.doc('delete_user')
+    @books.doc('delete_book')
     def delete(self, id):
         book = Books.query.filter_by(id=id).first()
 
